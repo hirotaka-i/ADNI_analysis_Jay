@@ -79,3 +79,32 @@ df_dm_cn = df_dm %>% filter(DX.bl %in% c("CN", "SMC"))
 And there is no interaction effect.
 
 # Testing HL
+```
+ with(table(HL_G4, DX.bl,  useNA = "ifany"))
+                  DX.bl
+HL_G4               AD  CN EMCI LMCI SMC
+  Abeta no HL no    17 118  128   44 117
+  Abeta no HL yes   22 110  106   70 110
+  Abeta yes HL no   78  40   89   81  45
+  Abeta yes HL yes 100  33   82   88  55
+```
+```
+> summary(em_slope)
+ HL_G4            year.trend     SE   df lower.CL upper.CL
+ Abeta no HL no      -0.0664 0.0394 1105   -0.144   0.0110
+ Abeta no HL yes     -0.0640 0.0465 1118   -0.155   0.0272
+ Abeta yes HL no     -0.6430 0.0666 1104   -0.774  -0.5123
+ Abeta yes HL yes    -0.6784 0.0830 1133   -0.841  -0.5155
+
+Results are averaged over the levels of: PTGENDER, APOEe4_carrier, PTRACCAT, PTMARRY 
+Degrees-of-freedom method: kenward-roger 
+Confidence level used: 0.95 
+
+
+> contrast(em_slope, list("Interaction worse than additive" = c(1, -1, -1, 1)))
+ contrast                        estimate    SE   df t.ratio p.value
+ Interaction worse than additive  -0.0378 0.123 1121  -0.309  0.7577
+
+Results are averaged over the levels of: PTGENDER, APOEe4_carrier, PTRACCAT, PTMARRY 
+Degrees-of-freedom method: kenward-roger 
+```
